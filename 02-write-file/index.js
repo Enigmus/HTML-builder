@@ -7,7 +7,7 @@ const pathToFile = path.join(__dirname, fileName);
 
 const writeStream = fs.createWriteStream(pathToFile);
 
-stdout.write('Клацая по клаве\n');
+stdout.write('Клацай по клаве\n');
 
 stdin.on('data', (data) => {
   if (data.toString().toLowerCase().trim() === 'exit') {
