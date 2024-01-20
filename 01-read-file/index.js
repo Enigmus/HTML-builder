@@ -6,3 +6,6 @@ const stream = fs.createReadStream(path.join(__dirname, 'text.txt'), {
 });
 
 stream.on('readable', () => console.log(stream.read()));
+stream.on('error', (error) =>
+  console.log(`Фигня какая то, вот ошибка ${error}`),
+);
