@@ -4,7 +4,7 @@ const path = require('node:path');
 const pathToBaseFld = path.join(__dirname, 'files');
 const pathToCopyFld = path.join(__dirname, 'files-copy');
 
-async function copyFolder(base, copy) {
+function copyFolder(base, copy) {
   fs.mkdir(copy, { recursive: true }, (err) => {
     if (err) console.log(err);
   });
@@ -28,13 +28,12 @@ async function copyFolder(base, copy) {
   });
 }
 
-fs.access(pathToCopyFld, fs.constants.F_OK, (err) => {
-  if (err) console.log(3);
+fs.access(pathToCopyFld, (err) => {
+  if (err) copyFolder(pathToBaseFld, pathToCopyFld);
   else {
-    fs.rm(pathToCopyFld, { force: true, recursive: true }, (err) => {
-      if (err) console.log(321);
+    fs.rm(pathToCopyFld, { recursive: true }, (err) => {
+      if (err) throw err;
+      copyFolder(pathToBaseFld, pathToCopyFld);
     });
   }
 });
-
-copyFolder(pathToBaseFld, pathToCopyFld);
