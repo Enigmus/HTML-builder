@@ -4,6 +4,15 @@ const path = require('path');
 const stylesFolder = path.join(__dirname, 'styles');
 const outFile = path.join(__dirname, 'project-dist', 'bundle.css');
 
+fs.access(outFile, (err) => {
+  if (err) return 0;
+  else {
+    fs.unlink(outFile, (err) => {
+      if (err) console.log(err);
+    });
+  }
+});
+
 fs.readdir(stylesFolder, { withFileTypes: true }, (err, files) => {
   if (err) console.log(err);
   files.forEach((file) => {
